@@ -24,12 +24,12 @@ const Settings = () => {
       provider).connect(signer);
 
     const currentBlock = await provider.getBlock("latest");
-    const tx = await contract.openBets(currentBlock.timestamp + Number(duration));
+    const tx = await contract.openBets(currentBlock.timestamp + Number(duration), {gasLimit: 5000000});
     console.log({tx});
     const receipt = await tx.wait();
     console.log({receipt});
 
-    const lotteryState = await contract.betsOpen()
+    const lotteryState = await contract.connect(signer).betsOpen()
     setLotteryState(lotteryState);
   };
 
