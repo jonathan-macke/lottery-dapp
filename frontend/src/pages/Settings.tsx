@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import {ethers} from "ethers";
 import Lottery from '../assets/Lottery.json';
 
@@ -7,7 +7,7 @@ import Lottery from '../assets/Lottery.json';
 const contractAddress: any = process.env.REACT_APP_LOTTERY_CONTRACT;
 
 const Settings = () => {
-  const [state, setLotteryState] = useState("closed");
+  const [state, setState] = useState("closed");
 
   const durationRef = useRef<HTMLInputElement>(null);
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,22 +24,30 @@ const Settings = () => {
       provider).connect(signer);
 
     const currentBlock = await provider.getBlock("latest");
-    const tx = await contract.openBets(currentBlock.timestamp + Number(duration), {gasLimit: 5000000});
-    console.log({tx});
-    const receipt = await tx.wait();
-    console.log({receipt});
+   
+    try {
+      const tx = await contract.openBets(currentBlock.timestamp + Number(duration), {gasLimit: 5000000});
+      console.log({tx});
+      const receipt = await tx.wait();
+      console.log({receipt});
+    } catch (e) {
+      console.log(`Error ${e}`);
+    }
 
-    const lotteryState = await contract.connect(signer).betsOpen()
-    setLotteryState(lotteryState);
+    const isOpen = await contract.connect(signer).betsOpen()
+    const lotteryState = state ? "open" : "closed";
+    console.log(`The lottery is ${lotteryState}\n`);
+    setState(lotteryState);
   };
 
   return (
     <>
+      <Alert key="info" variant="info">Lottery state: <strong>{state}</strong></Alert>
       <h1>Setup your bet</h1>
       <p className="lead">
-        Lottery  is: <strong>{contractAddress}</strong>
+        Lottery contract address: <strong>{contractAddress}</strong>
       </p>
-      <p>Lottery state: {state}</p>
+
       <form onSubmit={(e) => submitForm(e)}>
         <div className="form-group">
           <label htmlFor="Duration">Duration (in seconds)</label>
@@ -52,6 +60,7 @@ const Settings = () => {
           />
         </div>
         <Button variant="primary" type="submit">Create your bet</Button>
+          
       </form>
     </>
   );
