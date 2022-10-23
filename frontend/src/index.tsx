@@ -11,8 +11,8 @@ import "./index.css";
 import Layout from "./pages/Layout";
 import ErrorPage from "./pages/Error";
 import Main from "./pages/Main";
-import Voting from "./pages/Voting";
-import Utilities from "./pages/Utilities";
+import Bet from "./pages/Bet";
+import Settings from "./pages/Settings";
 
 import { MetaMaskProvider } from "metamask-react";
 
@@ -27,12 +27,12 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: "/voting",
-        element: <Voting />,
+        path: "/bet",
+        element: <Bet />,
       },
       {
-        path: "/utilities",
-        element: <Utilities />,
+        path: "/settings",
+        element: <Settings />,
       },
     ],
   },

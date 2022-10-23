@@ -3,8 +3,7 @@ const Footer = () => (
     <div className="inner">
       <p>
         Copyright 2022, Group6 @{" "}
-        <a href="https://www.encode.club/encode-bootcamps">Encode Bootcamp</a>,
-        by <a href="https://twitter.com/JohannKalote">@JohannKalote</a>.
+        <a href="https://www.encode.club/encode-bootcamps">Encode Bootcamp</a>
       </p>
     </div>
   </footer>

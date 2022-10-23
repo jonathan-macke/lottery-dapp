@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 
-const Utilities = () => {
+const Settings = () => {
   const [contractAddress, setContractAddress] = useState("Loading ...");
   const [respMessage, setRespMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
@@ -89,4 +89,4 @@ const Utilities = () => {
     </>
   );
 };
-export default Utilities;
+export default Settings;
