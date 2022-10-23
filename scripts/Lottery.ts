@@ -22,6 +22,7 @@ async function main() {
 }
 
 async function initContracts() {
+  console.log("init contracts");
   const contractFactory = await ethers.getContractFactory("Lottery");
   contract = await contractFactory.deploy(
     "LotteryToken",
@@ -34,6 +35,9 @@ async function initContracts() {
   const tokenAddress = await contract.paymentToken();
   const tokenFactory = await ethers.getContractFactory("LotteryToken");
   token = tokenFactory.attach(tokenAddress);
+
+  console.log(`token address contract: ${tokenAddress}`);
+  console.log(`lottery address contract: ${contract.address}`)
 }
 
 async function initAccounts() {

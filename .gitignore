@@ -27,6 +27,3 @@ yarn-error.log*
 typechain-types
 cache
 artifacts
-
-
-**/.env
