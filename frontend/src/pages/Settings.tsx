@@ -1,13 +1,14 @@
 import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import {ethers} from "ethers";
-import * as LotteryJson from '../assets/Lottery.json';
+import Lottery from '../assets/Lottery.json';
 
 
 const contractAddress: any = process.env.REACT_APP_LOTTERY_CONTRACT;
 
 const Settings = () => {
-  
+  const [state, setLotteryState] = useState("closed");
+
   const durationRef = useRef<HTMLInputElement>(null);
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const Settings = () => {
     console.log(`signer: ${signer}`);
     const contract = new ethers.Contract(
       contractAddress,
-      LotteryJson.abi,
+      Lottery.abi,
       provider).connect(signer);
 
     const currentBlock = await provider.getBlock("latest");
@@ -27,6 +28,9 @@ const Settings = () => {
     console.log({tx});
     const receipt = await tx.wait();
     console.log({receipt});
+
+    const lotteryState = await contract.betsOpen()
+    setLotteryState(lotteryState);
   };
 
   return (
@@ -35,6 +39,7 @@ const Settings = () => {
       <p className="lead">
         Lottery  is: <strong>{contractAddress}</strong>
       </p>
+      <p>Lottery state: {state}</p>
       <form onSubmit={(e) => submitForm(e)}>
         <div className="form-group">
           <label htmlFor="Duration">Duration (in seconds)</label>
