@@ -14,6 +14,8 @@ import Main from "./pages/Main";
 import Voting from "./pages/Voting";
 import Utilities from "./pages/Utilities";
 
+import { MetaMaskProvider } from "metamask-react";
+
 const router = createBrowserRouter([
   {
     path: "",
@@ -41,7 +43,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MetaMaskProvider>
+      <RouterProvider router={router} />
+    </MetaMaskProvider>
   </React.StrictMode>
 );
 
