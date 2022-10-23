@@ -1,15 +1,32 @@
 import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
+import {ethers} from "ethers";
+import * as LotteryJson from '../assets/Lottery.json';
 
 
-const contractAddress = process.env.REACT_APP_LOTTERY_CONTRACT;
+const contractAddress: any = process.env.REACT_APP_LOTTERY_CONTRACT;
 
 const Settings = () => {
   
   const durationRef = useRef<HTMLInputElement>(null);
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(`submit form: ${durationRef?.current?.value}`);
+    const duration = durationRef?.current?.value;
+    console.log(`submit form: ${duration}`);
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner();
+    console.log(`signer: ${signer}`);
+    const contract = new ethers.Contract(
+      contractAddress,
+      LotteryJson.abi,
+      provider).connect(signer);
+
+    const currentBlock = await provider.getBlock("latest");
+    const tx = await contract.openBets(currentBlock.timestamp + Number(duration));
+    console.log({tx});
+    const receipt = await tx.wait();
+    console.log({receipt});
   };
 
   return (
