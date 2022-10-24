@@ -11,7 +11,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "bootstrap": "^5.2.2",
-    "ethers": "^5.7.2",
+    "hardhat": "^2.12.0",
     "metamask-react": "^2.4.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -21,14 +21,12 @@
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -48,6 +46,8 @@
     ]
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.0",
+    "ethers": "^5.0.0",
     "prettier": "^2.7.1"
   }
 }
