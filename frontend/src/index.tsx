@@ -13,8 +13,10 @@ import ErrorPage from "./pages/Error";
 import Main from "./pages/Main";
 import Bet from "./pages/Bet";
 import Settings from "./pages/Settings";
+import BetState from "./pages/BetState";
 
 import { MetaMaskProvider } from "metamask-react";
+
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <Settings />,
+      },
+      {
+        path: "/betState",
+        element: <BetState/>,
       },
     ],
   },

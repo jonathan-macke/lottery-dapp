@@ -19,6 +19,10 @@ const Header = () => (
         <NavLink className="nav-link" to="/settings">
           Settings
         </NavLink>
+
+        <NavLink className="nav-link" to="/betState">
+         BetState
+        </NavLink>
       </nav>
     </div>
   </header>
