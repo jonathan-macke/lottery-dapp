@@ -35,7 +35,7 @@ const Settings = () => {
     }
 
     const isOpen = await contract.connect(signer).betsOpen()
-    const lotteryState = state ? "open" : "closed";
+    const lotteryState = isOpen ? "open" : "closed";
     console.log(`The lottery is ${lotteryState}\n`);
     setState(lotteryState);
   };
