@@ -5,9 +5,9 @@ const Header = () => (
     <div className="inner">
       <h3 className="masthead-brand">
         {" "}
-        <Link className="nav-link" to="/">
-          Lottery Dapp
-        </Link>
+   <nav>    <Link className="nav-link" to="/">
+          Lottery Dapp   
+        </Link> </nav> 
       </h3>
       <nav className="nav nav-masthead justify-content-center">
         <NavLink className="nav-link" to="/">
@@ -22,6 +22,16 @@ const Header = () => (
 
         <NavLink className="nav-link" to="/betState">
          BetState
+        </NavLink>
+
+        
+        <NavLink className="nav-link" to="/Token">
+        Token
+        </NavLink>
+
+         
+        <NavLink className="nav-link" to="/Balance">
+        Balance
         </NavLink>
       </nav>
     </div>

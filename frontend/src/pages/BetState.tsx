@@ -3,27 +3,25 @@ import { Alert, Button } from "react-bootstrap";
 import {ethers} from "ethers";
 import Lottery from '../assets/Lottery.json';
 
+
 const contractAddress: any = process.env.REACT_APP_LOTTERY_CONTRACT;
+
 const BetState =   () => {
+  let betState,closingPeriod='';
 
   const [state, setState] = useState("unknown");
-  var signer='';
 
   const getBetStatus=async()=>{
-   
-    if (window.ethereum.isMetaMask) {
 
     const addressArray = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-     console.log(addressArray);
+    console.log(addressArray);
 
      const address=addressArray[0];
 
-     signer = address;
-    }
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
- 
+      const provider = ethers.getDefaultProvider("goerli");
+      const signer = address;
       console.log(`signer:  ${signer}`);
       const contract = 
       new ethers.Contract(
@@ -50,6 +48,9 @@ const BetState =   () => {
         `lottery should close at  ${closingTimeDate.toLocaleDateString()} : ${closingTimeDate.toLocaleTimeString()}\n`
       );
 
+     betState=state;
+     closingPeriod=closingTimeDate.toLocaleDateString();
+
     const lotteryState = state ? "open" : "closed";
     console.log(`The lottery is ${lotteryState}\n`);
     setState(lotteryState);
@@ -57,13 +58,15 @@ const BetState =   () => {
     } catch (e) {
       console.log(`Error ${e}`);
     }
-  }
+  }  
+    getBetStatus();
+
     return (
       <>
        <Alert key="info" variant="info">Lottery state: <strong>{state}</strong></Alert>
-        <h1>This is your bet state</h1>
-       
-    <button  onClick={()=>getBetStatus()}> Check state</button>
+        <h1>This is your bet state   {betState}</h1>
+       <h1> This is your bet closing time {closingPeriod}  </h1>
+   
       </>
     );
  

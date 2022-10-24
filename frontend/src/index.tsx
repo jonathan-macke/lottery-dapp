@@ -16,6 +16,8 @@ import Settings from "./pages/Settings";
 import BetState from "./pages/BetState";
 
 import { MetaMaskProvider } from "metamask-react";
+import Token from "./pages/Token";
+import Balance from "./pages/Balance";
 
 
 const router = createBrowserRouter([
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "/betState",
         element: <BetState/>,
+      },
+      {
+        path: "/Token",
+        element: <Token/>,
+      },
+      {
+        path: "/Balanace",
+        element: <Balance />,
       },
     ],
   },
